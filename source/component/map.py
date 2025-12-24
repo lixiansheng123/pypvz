@@ -17,7 +17,7 @@ class Map:
                     self.initMapGrid(c.MAP_WATER)
                     if 2 <= y <= 3
                     else self.initMapGrid(c.MAP_GRASS)
-                    for x in range(self.width)
+                    for _ in range(self.width)
                 ]
                 for y in range(self.height)
             ]
@@ -26,7 +26,7 @@ class Map:
             self.height = c.GRID_ROOF_Y_LEN
             self.grid_height_size = c.GRID_ROOF_Y_SIZE
             self.map = [
-                [self.initMapGrid(c.MAP_TILE) for x in range(self.width)]
+                [self.initMapGrid(c.MAP_TILE) for _ in range(self.width)]
                 for y in range(self.height)
             ]
         elif self.background_type == c.BACKGROUND_SINGLE:

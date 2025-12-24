@@ -36,6 +36,11 @@ class Level(tool.State):
         self.initState()
 
     def loadMap(self):
+
+        # 如果游戏模式的话 默认冒险模式
+        if c.GAME_MODE not in self.game_info:
+            self.game_info[c.GAME_MODE] = c.MODE_ADVENTURE
+
         # 冒险模式
         if self.game_info[c.GAME_MODE] == c.MODE_ADVENTURE:
             if 0 <= self.game_info[c.LEVEL_NUM] < map.TOTAL_LEVEL:
@@ -115,12 +120,12 @@ class Level(tool.State):
         self.head_group = pg.sprite.Group()
 
         # 改用列表生成器直接生成内容，不再在这里使用for循环
-        self.plant_groups = [pg.sprite.Group() for i in range(self.map_y_len)]
-        self.zombie_groups = [pg.sprite.Group() for i in range(self.map_y_len)]
+        self.plant_groups = [pg.sprite.Group() for _ in range(self.map_y_len)]
+        self.zombie_groups = [pg.sprite.Group() for _ in range(self.map_y_len)]
         self.hypno_zombie_groups = [
-            pg.sprite.Group() for i in range(self.map_y_len)
+            pg.sprite.Group() for _ in range(self.map_y_len)
         ]   # 被魅惑的僵尸
-        self.bullet_groups = [pg.sprite.Group() for i in range(self.map_y_len)]
+        self.bullet_groups = [pg.sprite.Group() for _ in range(self.map_y_len)]
 
     # 按照规则生成每一波僵尸
     # 将波刷新和一波中的僵尸生成分开

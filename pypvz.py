@@ -44,7 +44,7 @@ if __name__ == '__main__':
             c.AWARD_SCREEN: screen.AwardScreen(),
             c.HELP_SCREEN: screen.HelpScreen(),
         }
-        game.setup_states(state_dict, c.MAIN_MENU)
+        game.setup_states(state_dict, c.LEVEL)
         game.run()
     except:
         print()   # 将日志输出与上文内容分隔开，增加可读性
