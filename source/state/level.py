@@ -151,6 +151,7 @@ class Level(tool.State):
 
         # 按照原版pvz设计的僵尸容量函数，是从无尽解析的，但是普通关卡也可以遵循
         for wave in range(1, 10 * num_flags + 1):
+            # 僵尸上限
             zombie_volume = (
                 int(int((wave + survival_rounds * 20) * 0.8) / 2) + 1
             )
@@ -416,16 +417,13 @@ class Level(tool.State):
 
     # 旧机制，目前仅用于调试
     def setupZombies(self):
-        def takeTime(element):
-            return element[0]
-
         self.zombie_list = []
         for data in self.map_data[c.ZOMBIE_LIST]:
             self.zombie_list.append(
                 (data['time'], data['name'], data['map_y'])
             )
         self.zombie_start_time = 0
-        self.zombie_list.sort(key=takeTime)
+        self.zombie_list.sort(key=lambda element: element[0])
 
     def setupCars(self):
         self.cars = []
