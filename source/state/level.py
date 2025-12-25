@@ -75,6 +75,7 @@ class Level(tool.State):
                     f'pypvz: 冒险模式 {self.map_data[c.GAME_TITLE]}'
                 )
                 logger.warning('关卡数设定错误！进入默认的第一关！\n')
+
         # 是否有铲子的信息：无铲子时为0，有铲子时为1，故直接赋值即可
         self.has_shovel = self.map_data[c.SHOVEL]
 
@@ -460,10 +461,7 @@ class Level(tool.State):
                 )   # 将坚果保龄球红线右侧设置为不可种植任何植物
 
     def initState(self):
-        if c.CHOOSEBAR_TYPE in self.map_data:
-            self.bar_type = self.map_data[c.CHOOSEBAR_TYPE]
-        else:
-            self.bar_type = c.CHOOSEBAR_STATIC
+        self.bar_type = self.map_data.get(c.CHOOSEBAR_TYPE, c.CHOOSEBAR_STATIC)
 
         if self.bar_type == c.CHOOSEBAR_STATIC:
             self.initChoose()
@@ -488,6 +486,11 @@ class Level(tool.State):
         pg.mixer.music.load(
             os.path.join(c.PATH_MUSIC_DIR, 'chooseYourSeeds.opus')
         )
+
+        # pg.mixer.music.play 形参:
+        # loops: 循环次数，-1 表示无限循环，0 表示只播放一次，1 表示播放两次（总共），以此类推
+        # start: 从第几秒开始播放（默认0.0）
+        # fade_ms: 淡入效果的时间（毫秒），例如设置 2000 表示用2秒淡入
         pg.mixer.music.play(-1, 0)
         pg.mixer.music.set_volume(self.game_info[c.SOUND_VOLUME])
 
@@ -497,7 +500,7 @@ class Level(tool.State):
             self.pauseAndCheckMenuOptions(mouse_pos, mouse_click)
             return
 
-        elif mouse_pos and mouse_click[0]:
+        elif mouse_pos and mouse_click[0]: # 点击了鼠标左击
             self.panel.checkCardClick(mouse_pos)
             if self.panel.checkStartButtonClick(mouse_pos):
                 self.initPlay(self.panel.getSelectedCards())
