@@ -152,6 +152,9 @@ class Level(tool.State):
         # 按照原版pvz设计的僵尸容量函数，是从无尽解析的，但是普通关卡也可以遵循
         for wave in range(1, 10 * num_flags + 1):
             # 僵尸上限
+            # 第一轮 第一波 值为 1.4 只会出现一个僵尸
+            # 第一轮 第二波 值为 1.8 只会出现一个僵尸
+            # ...
             zombie_volume = (
                 int(int((wave + survival_rounds * 20) * 0.8) / 2) + 1
             )
