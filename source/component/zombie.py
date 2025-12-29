@@ -88,13 +88,13 @@ class Zombie(pg.sprite.Sprite):
         self.animation()
 
     def handleState(self):
-        if self.state == c.WALK:
+        if self.state == c.WALK: # 走
             self.walking()
-        elif self.state == c.ATTACK:
+        elif self.state == c.ATTACK: # 攻击
             self.attacking()
-        elif self.state == c.DIE:
+        elif self.state == c.DIE: # 挂掉
             self.dying()
-        elif self.state == c.FREEZE:
+        elif self.state == c.FREEZE: # 冻结
             self.freezing()
 
     # 濒死状态用函数
